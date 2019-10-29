@@ -1,0 +1,25 @@
+{
+  "name": "shrug-leaflet-presentation",
+  "version": "1.0.0",
+  "description": "A leaflet map for the shrug presentation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clintonlunn/SHRUG-leaflet-presentation.git"
+  },
+  "keywords": [
+    "leaflet"
+  ],
+  "author": "Clinton Lunn",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/clintonlunn/SHRUG-leaflet-presentation/issues"
+  },
+  "homepage": "https://github.com/clintonlunn/SHRUG-leaflet-presentation#readme",
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  }
+}
