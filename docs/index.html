@@ -334,7 +334,7 @@ const map = L.map(&#39;map&#39;,{
 		<p>First, we are going to use the fetch API to grab our data:</p>
 
 		<pre><code class="language-markup">
-fetch('../data/Pace_Bike_Racks_View.json')
+fetch('./Pace_Bike_Racks_View.json')
 	.then(response => {
 	if (response.ok === true) {
 		return response.json();
