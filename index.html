@@ -1,20 +1,484 @@
-<!doctype html>
+<!DOCTYPE html>
 
-<html lang="en">
+<html>
 
 <head>
-  <meta charset="utf-8">
 
-  <title>The HTML5 Herald</title>
-  <meta name="description" content="The HTML5 Herald">
-  <meta name="author" content="SitePoint">
-
-  <link rel="stylesheet" href="css/styles.css?v=1.0">
+	<title>Leaflet Tutorial</title>
+	<link rel='shortcut icon' href='imgs/moto.png' type='image/x-icon' />
+	<link rel="stylesheet" href="css/site.css" />
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+		integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+		crossorigin="" />
+	<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+		integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+		crossorigin=""></script>
+	<script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.2.4"></script>
+	<script src="https://unpkg.com/esri-leaflet@2.3.2/dist/esri-leaflet.js"
+		integrity="sha512-6LVib9wGnqVKIClCduEwsCub7iauLXpwrd5njR2J507m3A2a4HXJDLMiSZzjcksag3UluIfuW1KzuWVI5n/cuQ=="
+		crossorigin=""></script>
+	<script>
+		hljs.initHighlightingOnLoad();
+	</script>
+	<meta charset="utf-8">
 
 </head>
 
 <body>
-  <script src="js/scripts.js"></script>
+	<header>
+		<div id='header_map'>
+			<h1>SHRUG: leaflet.js</h1>
+		</div>
+	</header>
+
+	a<div class='section'>
+		<h2>Let's make some web maps using <a href='http://leafletjs.com/'>Leaflet.js</a>!</h2>
+		<p>In this tutorial, we will learn about some basic HTML, CSS, and JavaScript (specifically, the Leaflet.js
+			library) to create a series of progressively complex web maps.</p>
+		<p><a href='https://en.wikipedia.org/wiki/HTML'>HTML (HyperText Markup Language)</a> allows us to structure
+			content for our web page. Our map will be contained in an element within an HTML file.</p>
+		<p><a href='https://en.wikipedia.org/wiki/Cascading_Style_Sheets'>CSS (Cascading Style Sheets)</a> gives us
+			control of the style and visual presentation of our web page. We use it to determine the placement and
+			sizing of
+			the map and to customize some Leaflet elements.</p>
+		<p><a href='https://en.wikipedia.org/wiki/JavaScript'>JS (JavaScript)</a> gives us the ability to add
+			interactivity to our web page. We will use it to pull in map tiles to our web page, add data (or content
+			layers), and handle user interaction with the map.</p>
+	</div>
+
+	<div class='section'>
+		<p>So, you want to learn how to make a web map?</p>
+		<p>There are a wealth of options out there (ArcGIS Online, WebApp Builder, ArcGIS JS API, OpenLayers, Leaflet,
+			Mapbox, CartoDB, D3.js) to achieve this dream...but today we will look at Leaflet.js</p>
+		<h2>So, what exactly is Leaflet?</h2>
+		<p><a href='http://leafletjs.com/'>Leaflet</a> is an open-source JavaScript library that gives us code to create
+			interactive, mobile friendly web maps. Think of it as a collection (or library) of prewritten JavaScript
+			that does some of the heavy lifting/scripting of web map stuff for us. We will interact with the library
+			through its well documented <a href='http://leafletjs.com/reference.html'>API</a>. It has a small file size
+			but is packed with useful <a href='http://leafletjs.com/features.html'>features</a> and can be extended even
+			further with <a href='http://leafletjs.com/plugins.html'>plugins</a>.</p>
+
+		<h4>What Leaflet is:</h4>
+		<p>"Slippy" maps with tile based layers with zooming, panning, and feature layers that dev supplies. It handles
+			various basic overhead tasks like converting data to map layers and mouse interactions, and it's easy to
+			extend with plugins. It will also work well across most types of mobile and non-mobile devices.</p>
+		<h4>What Leaflet is not:</h4>
+		<p>Leaflet doesn't provide any data for you! Leaflet is a framework for showing and interacting with map data,
+			but it's up to you to provide that data, including a basemap. Leaflet is also not GIS, although it can be
+			combined with tools like CartoDB for GIS-like capabilities. If you need total freedom of form, interaction,
+			transitions,
+			and map projections, consider working with something like D3.</p>
+	</div>
+
+	<div class='section'>
+		<h2>Setup</h2>
+		<p>For this guide you will need:</p>
+		<ul>
+			<li>a computer</li>
+			<li>internet access</li>
+			<li>a web browser (most any modern browser)</li>
+			<li>a text or code editor (notepad, textedit, <a href="">visual studio Code</a> (what we will be using
+				today), <a href="http://www.sublimetext.com/">sublime text</a>, <a href="https://atom.io/">atom
+					editor</a>, etc)</li>
+			<li>a local web server</li>
+		</ul>
+
+		<p>To display your map, it is useful to have a local server running on your computer. There are many ways to
+			create a local server on your machine, but one that I prefer is the <a
+				href="https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer">Live Server</a> plugin
+			for VSCode because it's a single click solution to starting and displaying your HTML files.</p>
+	</div>
+
+	<div class='section'>
+		<h2>Basic map of Tallahassee Centered on the FSU Campus</h2>
+		<p>Here is the base map we'll build first:</p>
+		<div id='basicMap' class='map'></div>
+		<p class='small'><em>view </em><a href='examples/basicMap.html'>example</a></p>
+	</div>
+
+	<div class='section'>
+		<h2>Create a basic HTML document</h2>
+		<p>Open a text editor (<a href="https://code.visualstudio.com">vscode</a>) --> Create a new file --> Save the
+			file using a .html extension.</p>
+		<p>Next, set up the structure of the web page by adding the following markup to the file:</p>
+		<pre><code class="language-markup">
+&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;html&gt;
+
+  &lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Quick Start - Leaflet&lt;/title&gt;
+    &lt;style&gt;
+    &lt;/style&gt;
+  &lt;/head&gt;
+  
+  &lt;body&gt;
+    &lt;script&gt;
+    &lt;/script&gt;
+  &lt;/body&gt;
+
+&lt;/html&gt;
+
+</code></pre>
+
+	</div>
+
+	<div class='section'>
+		<h2>Reference the Leaflet CSS and JavaScript Files</h2>
+		<p>Next, in order to use the Leaflet library, we need to reference its CSS and JavaScript files in the HTML
+			file.</p>
+		<p>There are a few ways that you can reference these files:</p>
+		<ol>
+			<li>Reference the hosted Leaflet files (by its CDN)</li>
+			<li>Download copies and host them locally from a libary folder within our project</li>
+		</ol>
+		<p>For simplicity's sake, we are going to references the hosted files. To do this, insert the code below into
+			the &lt;head&gt; section of the HTML page:</p>
+		<pre><code class="language-markup">
+&lt;link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+crossorigin="" /&gt;
+		</code></pre>
+
+		<p>Next, include Leaflet's JavaScript file <strong>after</strong> Leaflet's CSS file</p>
+		<pre><code>
+&lt;script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+crossorigin=""&gt;&lt;/script&gt;
+	</code></pre>
+
+	</div>
+
+	<div class='section'>
+		<h2>Add the map div and give it some style</h2>
+		<p>Leaflet requires a &lt;div&gt; element to contain the map and that that &lt;div&gt; element have a set
+			height.</p>
+		<p>Create a &lt;div&gt; element with the id of &quot;map&quot; to contain the map by adding the following to the
+			HTML <strong>&lt;body&gt;</strong>:</p>
+		<pre><code>
+&lt;div id=&quot;map&quot;&gt;&lt;/div&gt;
+	</code></pre>
+		<p>To create a map that is 800 px by 600 px add the following CSS code between the &lt;style&gt; tags in the
+			&lt;head&gt; section of the HTML page:</p>
+		<pre><code>
+#map {
+width: 800px;
+height: 600px;
+}
+	</code></pre>
+		<p>Now that the HTML and CSS are set, we have set up the basic structure and style of our web map. Next, all we
+			need to do is
+			add some JavaScript and we'll have a web map!</p>
+		<p>Easy, right?</p>
+	</div>
+
+	<div class='section'>
+		<h2>Initialize the map!</h2>
+		<p>The first script we will write pulls in some map tiles and configures a few basic map settings.</p>
+		<p>Enter the following JavaScript between the &lt;script&gt; tags of the HTML file.</p>
+		<pre><code>
+&lt;script&gt;
+
+    var map = L.map(&#39;map&#39;,{
+    center: [30.4383, -84.2807],
+    zoom: 15
+    });
+
+    L.tileLayer(&#39;http://{s}.tile.osm.org/{z}/{x}/{y}.png&#39;, {
+    attribution: &#39;&amp;copy; &lt;a href=&quot;http://osm.org/copyright&quot;&gt;OpenStreetMap&lt;/a&gt; contributors&#39;
+    }).addTo(map);
+
+&lt;/script&gt;
+
+	</code></pre>
+
+		<p>The code is now complete so the file should now look like this:</p>
+
+		<pre><code>
+&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;html&gt;
+
+  &lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Quick Start - Leaflet&lt;/title&gt;
+    &lt;link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin="" /&gt;
+    
+    &lt;script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+    integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="&gt;
+    &lt;/script&gt;
+    &lt;style&gt;
+      #map {
+        width: 960px;
+        height: 500px;
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  
+  &lt;body&gt;
+    &lt;div id="map"&gt;&lt;/div&gt;
+    &lt;script&gt;
+    
+      var map = L.map(&#39;map&#39;,{
+        center: [30.4383, -84.2807],
+        zoom: 15
+      });
+      
+      L.tileLayer(&#39;http://{s}.tile.osm.org/{z}/{x}/{y}.png&#39;, {
+        attribution: &#39;&amp;copy; &lt;a href=&quot;http://osm.org/copyright&quot;&gt;OpenStreetMap&lt;/a&gt;
+        contributors&#39;
+      }).addTo(map);
+    
+    &lt;/script&gt;
+  &lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre>
+
+		<h4>Let's break this all down:</h4>
+		<ol>
+			<li>Create the map variable to house the map object</li>
+			<li>Use <a href='http://leafletjs.com/reference.html#map-constructor'>L.map()</a> to initialize
+				the map object, then pass it the id of where we want the map to go within our HTML document. We also
+				added a latitude, longitude, and zoom level to give our map an initial center point and zoom on first
+				load.
+				<ul>
+					<li>
+						Additionally, we can use the <a
+							href="http://leafletjs.com/reference.html#map-setview">setView()</a> method to also define
+						our starting point and zoom level</li>
+
+				</ul>
+			</li>
+		</ol>
+
+		<p>First, the code within the <strong>&lt;script&gt;&lt;/script&gt;</strong> creates the 'map' variable, assigns
+			it a new <a href='http://leafletjs.com/reference.html#map-constructor'>L.map</a> object, then passes it the
+			id (‘map’in this case) of the div element in which the map is to be contained. The script goes on to pass
+			some options that set an initial center point and zoom level for the map. Essentially, this creates a map on
+			the page that we can manipulate.</p>
+		<p>Next, the script creates a new <a href='http://leafletjs.com/reference.html#tilelayer'>L.tileLayer</a>
+			object, specifying a particular set of tiles to be loaded into the map container and passes in an
+			'attribution' option. In this case <a href='http://www.openstreetmap.org'>OpenStreetMap</a> tiles are used
+			but there are many <a href='https://leaflet-extras.github.io/leaflet-providers/preview/index.html'>map tile
+				providers.</a> Experiment with different sets and remember to always properly attribute
+			the data and imagery used!</p>
+		<p>Finally, the <a href='http://leafletjs.com/reference.html#tilelayer-addto'>addTo()</a> method is used to add
+			the tile layer to the map.</p>
+		<br>
+
+		<p>Side note: </p>
+		<p>Alternatively, instead of using the <a href='http://leafletjs.com/reference.html#tilelayer-addto'>addTo()</a>
+			method to individually add our layers, we can define our layers ahead of time, and include them into the map
+			declaration, see example below:</p>
+		<pre><code>
+
+const map = L.map(&#39;map&#39;,{
+	center: [43.64701, -79.39425],
+	zoom: 15,
+	layers: [citiesLayer, statesLayer] // adding our layers as a group
+});
+		</code></pre>
+
+		<p>Make sure to save your file and open your map on your local server.</p>
+		<p>Hopefully, you will see leaflet map showing the FSU campus!</p>
+	</div>
+
+	<div class='section'>
+		<h2>Modify the Base Map</h2>
+		<p>One minor modification that we can make to this map is removing the scrolling mouse scroll capabilities for
+			our map. This forces the user to press the zoom buttons to scroll the map closer and farther.</p>
+		<div id='mapa' class='map'></div>
+		<p class='small'><em>view </em><a href='examples/example2.html'>example</a></p>
+
+		<pre><code>
+&lt;script&gt;
+
+    var map = L.map(&#39;map&#39;<span class="newCode">,{scrollWheelZoom:false}).setView([43.64701, -79.39425], 15)</span>;
+
+    L.tileLayer(&#39;http://{s}.tile.osm.org/{z}/{x}/{y}.png&#39;, {
+    attribution: &#39;&amp;copy; &lt;a href=&quot;http://osm.org/copyright&quot;&gt;OpenStreetMap&lt;/a&gt; contributors&#39;
+    }).addTo(map);
+
+&lt;/script&gt;
+		</code></pre>
+		<p>First, remove the 'center' and 'zoom' options from the L.map constructor.</p>
+		<p>Next, modify the script to deactivate the <a
+				href='http://leafletjs.com/reference.html#map-scrollwheelzoom'>scrollWheelZoom</a> interactivity option
+			so that we don't accidentally zoom the map when we are trying to scroll down the page. This is done by
+			passing 'scrollWheelZoom: false' as an option to L.map(). This can be a particularly important usability
+			issue if the map is large or if there is content above and/or below it.</p>
+		<p>Finally, set the initial center and zoom level with the <a
+				href='http://leafletjs.com/reference.html#map-setview'>setView()</a> method.</p>
+		<p>The map should look just like our first one but we can't control the zoom level by scrolling and the code is
+			a bit streamlined.</p>
+		<p>Now we have a customized base map with which to build on.</p>
+	</div>
+
+	<div class='section'>
+		<h2>Add some data</h2>
+		<p>Next, let's explore one way to add some data to our map...</p>
+		<p>Let's take some local GeoJSON data of Pace Bike Racks around Tallahassee and put them into our map using the
+			<a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch">fetch API</a> and
+			Leaflet's GeoJSON functionality,
+			<a href="https://leafletjs.com/reference-1.5.0.html#geojson">L.GeoJSON()</a>.
+		</p>
+
+		<p>First, we are going to use the fetch API to grab our data:</p>
+
+		<pre><code class="language-markup">
+fetch('../data/Pace_Bike_Racks_View.json')
+	.then(response => {
+	if (response.ok === true) {
+		return response.json();
+	} else {
+		alert('Geojson request failed.');
+	}
+});
+			</code></pre>
+		<p>Let's unpack this a bit, the fetch API will let us give a reference to the location of our GeoJSON data file.
+			Once we receive the response, we ask if the response came back okay (request was successful), we return the
+			contents of that response and convert to JSON format with response.json()</p>
+		<p>Next, let's add the request contents to our map with <a
+				href="https://leafletjs.com/reference-1.5.0.html#geojson">L.GeoJSON()</a>.</p>
+
+		<p>Here's the whole code snippit:</p>
+		<pre><code>
+	&lt;script&gt;
+	  const basemapLayer = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+	  attribution: '&copy; &lt;a href="http://osm.org/copyright"&gt;OpenStreetMap&lt;/a&gt;',
+	  });
+	  
+	  var map = L.map('map', {
+		center: [30.4383, -84.2807],
+		zoom: 13,
+		layers: [basemapLayer]
+	  });
+	
+	  // Let's add some data of pace bike racks in Tallahassee
+	  fetch('../data/Pace_Bike_Racks_View.json')
+		.then(response =&gt; {
+		  if (response.ok === true) {
+			return response.json(); // our data was fetched successfully
+		  } else {
+			alert('Geojson request failed.');
+		  }
+		})
+		.then(bikeRacks =&gt; {
+		  L.geoJSON(bikeRacks).addTo(map);
+		});
+	&lt;/script&gt;
+			</code></pre>
+		<div id='paceBikes' class='map'></div>
+		<p class='small'><em>view </em><a href='examples/paceBikes.html'>example</a></p>
+	</div>
+
+	<div class='section'>
+		<h1>Plugins!</h1>
+		<p>One of the cool things about Leaflet is that it's built to be completely extendable with and there are an
+			abundance
+			of <a href="https://leafletjs.com/plugins.html">plugins</a> to be used and modified. It's also completely
+			necessary because Leaflet gives you very little functionality out of the box.</p>
+		<p>One "plugin" (really like a small library of functionality) that we will look at today is <a
+				href="https://esri.github.io/esri-leaflet/"></a>ESRI Leaflet that
+			will help us interface with ESRI's data services.</p>
+	</div>
+	<div class='section'>
+		<h2>ESRI Leaflet</h2>
+		<p>ESRI is pervasive throughout the GIS industry, and there is a good chance that your organization uses their
+			technologies. </p>
+
+		<p>To bring in ESRI Leaflet, all we need to do is include Leaflet's CDN in our html file</p>
+
+		<pre><code>
+&lt;script src=&quot;https://unpkg.com/esri-leaflet@2.3.2/dist/esri-leaflet.js&quot;
+integrity=&quot;sha512-6LVib9wGnqVKIClCduEwsCub7iauLXpwrd5njR2J507m3A2a4HXJDLMiSZzjcksag3UluIfuW1KzuWVI5n/cuQ==&quot;
+crossorigin=&quot;&quot;>&lt;/script&gt;
+
+		</code></pre>
+
+		<p>Next, we can bring in a FeatureLayer by using the <a
+				href="https://esri.github.io/esri-leaflet/api-reference/layers/feature-layer.html">L.esri.featureLayer()</a>
+			method. Let's bring in some TLCGIS data:</p>
+
+		<div id='esriLeaflet' class='map'></div>
+
+		<pre><code>
+			// where esri leaflet example will go
+		</code></pre>
+	</div>
+
+	<div class='section'>
+		<h2>Go forth and Prosper!</h2>
+		<p>We've only scratched the surface of what you can do with Leaflet maps. Tinker around with these examples and
+			see what you can come up with!</p>
+		<p>While we focused on simply making maps today, there is much to be said about map design. If you're familiar
+			with the <a href="https://github.com/Esri/calcite-maps">Calcite Maps</a> framework often used with the <a
+				href="https://developers.arcgis.com/javascript/">ArcGIS JavaScript API</a>, there is a Leaflet
+			adaptation as well.</p>
+		<p>One of the awesome things about Leaflet is that there are tons of resources out there for learning in
+			addition to their documentation. I used many of these resources to prepare this tutorial for <a
+				href="http://shrug-gis.org/workshop/2019/">SHRUG</a>. </p>
+		<p>Leaflet documentation: <a href="https://leafletjs.com/reference-1.5.0.html"></a></p>
+		<p><a href='http://leafletjs.com/examples.html'>Leaflet tutorials</a> on the official Leaflet website.</p>
+		<p>A <a href="">Leaflet tutorial</a> written for maptime boston by Andy Woodruff and Ryan Mullins that gets into
+			some of the more complicated functionality and techniques.</p>
+		<p>a <a href="">Leaflet tutorial</a> written for DUSPViz (MIT’s Department of Urban Studies & Planning) that
+			covers the basics, but also adds things like mouseclick events to trigger actions on the map.</p>
+		<p><a href='http://maptime.io/anatomy-of-a-web-map/#0'>Anatomy of a Web Map</a>, by Alan McConchie and Beth
+			Schechter of <a href='http://maptime.io/'>Maptime</a> and <a href='http://stamen.com/'>Stamen.</a></p>
+		<p><a href='https://www.packtpub.com/web-development/leafletjs-essentials'>Leaflet.js Essentials</a>, a book by
+			Paul Crickard III.</p>
+		<p><a
+				href='https://github.com/geografa/foss4g2014-workshops/blob/master/Leaflet-and-Mapbox-JavaScript-API-Fundamentals.pdf'>Leaflet
+				and Mapbox JavaScript API Fundamentals</a>, a presentation by Mapbox's Rafa Gutierrez.</p>
+		<p><a href='http://lyzidiamond.com/maptimepdx/leaflet'>Leaflet Intro</a>, a Maptime PDX presentation by Lyzi
+			Diamond.</p>
+		<p><a href='http://maptimeboston.github.io/leaflet-intro/'>Leaflet Tutorial</a>, written for Maptime Boston by
+			Andy Woodruff and Ryan Mullins that gets into some more advanced techniques such as incorporating jQuery,
+			external geojson files and the Leaflet.markercluster plugin into a project.
+			<p><a href='http://luxembourgjs.github.io/leaflet-demo/#/'>Leaflet.JS Introduction</a>, by Thierry Nicola
+				for JS Luxembourg.</p>
+			<p><a href="http://leaflet-extras.github.io/leaflet-providers/preview/index.html">Leaflet provider</a> map,
+				an open source Leaflet extension that contains configurations for various free tile providers.</p>
+			<p><a href="https://www.mapbox.com/guides">Mapbox Guides</a> and <a
+					href='https://www.mapbox.com/mapbox.js/examples/'>examples</a> are great for learning about web maps
+				in general in addition to Mapbox.js, which is built on top of Leaflet.</p>
+	</div>
+
+	<div class='foot'>
+		<hr />
+		<p><span class='left'>Find a mistake? Submit an <a
+					href="https://github.com/clintonlunn/shrug-leaflet-presentation/issues/new">Issue</a> on
+				Github!</span><a href='#'>Back to Top</a></p>
+	</div>
+
+	<script src='js/site.js'></script>
+
+	<!-- <script>
+		(function (i, s, o, g, r, a, m) {
+			i['GoogleAnalyticsObject'] = r;
+			i[r] = i[r] || function () {
+				(i[r].q = i[r].q || []).push(arguments)
+			}, i[r].l = 1 * new Date();
+			a = s.createElement(o),
+				m = s.getElementsByTagName(o)[0];
+			a.async = 1;
+			a.src = g;
+			m.parentNode.insertBefore(a, m)
+		})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+		ga('create', 'UA-35978610-1', 'auto');
+		ga('send', 'pageview');
+	</script> -->
+
 </body>
 
 </html>
