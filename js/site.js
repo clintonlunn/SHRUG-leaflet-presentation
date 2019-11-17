@@ -44,7 +44,7 @@
 	  	});
 
 	  	// Let's add some data of pace bike racks in Tallahassee
-	  	fetch('../Pace_Bike_Racks_View.json')
+	  	fetch('./Pace_Bike_Racks_View.json')
 	  		.then(function (response) {
 	  			if (response.ok === true) {
 	  				return response.json(); // our data was fetched successfully
