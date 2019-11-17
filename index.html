@@ -28,8 +28,8 @@
 
 <body>
 	<header>
+		<h1>SHRUG: leaflet.js</h1>
 		<div id='header_map'>
-			<h1>SHRUG: leaflet.js</h1>
 		</div>
 	</header>
 
@@ -50,8 +50,13 @@
 
 	<div class='section'>
 		<p>So, you want to learn how to make a web map?</p>
-		<p>There are a wealth of options out there (ArcGIS Online, WebApp Builder, ArcGIS JS API, OpenLayers, Leaflet,
-			Mapbox, CartoDB, D3.js) to achieve this dream...but today we will look at Leaflet.js</p>
+		<p>There are a wealth of options out there (<a href="https://www.arcgis.com/index.html">ArcGIS Online</a>, <a
+				href="https://doc.arcgis.com/en/web-appbuilder/">Web AppBuilder for ArcGIS</a>, <a
+				href="https://developers.arcgis.com/javascript/">ArcGIS JavaScript API</a>, <a
+				href="https://openlayers.org/">OpenLayers</a>, <a href="https://leafletjs.com">Leaflet</a>,
+			<a href="https://www.mapbox.com">Mapbox</a>, <a href="https://carto.com">Carto</a>, <a
+				href="https://d3js.org">D3.js</a>, and more) to achieve this dream...but today we will look at
+			Leaflet.js</p>
 		<h2>So, what exactly is Leaflet?</h2>
 		<p><a href='http://leafletjs.com/'>Leaflet</a> is an open-source JavaScript library that gives us code to create
 			interactive, mobile friendly web maps. Think of it as a collection (or library) of prewritten JavaScript
@@ -411,7 +416,54 @@ crossorigin=&quot;&quot;>&lt;/script&gt;
 		<div id='esriLeaflet' class='map'></div>
 
 		<pre><code>
-			// where esri leaflet example will go
+&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;html&gt;
+
+  &lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Quick Start - Leaflet&lt;/title&gt;
+    &lt;link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin="" /&gt;
+  
+    &lt;script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+    integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+    crossorigin=""&gt;&lt;/script&gt;
+    
+    &lt;script src="https://unpkg.com/esri-leaflet@2.3.2/dist/esri-leaflet.js"
+    integrity="sha512-6LVib9wGnqVKIClCduEwsCub7iauLXpwrd5njR2J507m3A2a4HXJDLMiSZzjcksag3UluIfuW1KzuWVI5n/cuQ=="
+    crossorigin=""&gt;&lt;/script&gt;
+  
+    &lt;style&gt;
+      #map {
+        width: 960px;
+        height: 500px;
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  
+  &lt;body&gt;
+    &lt;div id="map"&gt;&lt;/div&gt;
+    &lt;script&gt;
+      var map = L.map('map', {
+        center: [30.4383, -84.2807],
+        zoom: 15
+      });
+    
+      L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; &lt;a href="http://osm.org/copyright"&gt;OpenStreetMap&lt;/a&gt;'
+      }).addTo(map);
+    
+      // add our esri feature layer
+      L.esri.featureLayer({
+        url: 'https://services.arcgis.com/ptvDyBs1KkcwzQNJ/arcgis/rest/services/Pace_Bike_Racks/FeatureServer/0'
+      }).addTo(map);
+    &lt;/script&gt;
+  &lt;/body&gt;
+
+&lt;/html&gt;
 		</code></pre>
 	</div>
 
