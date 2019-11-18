@@ -63,8 +63,7 @@ header h1 {
 	padding: 20px;
 	color: #782F40;
 	text-shadow: -3px -3px 0px #CEB888;
-	/* , -6px -6px 0px #0000, -9px -9px 0px #782F40, -12px -12px 0px #CEB888, -15px -15px 0px #782F40; */
-	z-index: 10 !important;
+	z-index: 999 !important;
 }
 
 #header_map {
