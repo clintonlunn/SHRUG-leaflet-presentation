@@ -34,30 +34,12 @@
 	</header>
 
 	<div class='section'>
-		<h2>Let's make some web maps using <a href='http://leafletjs.com/'>Leaflet.js</a>!</h2>
 		<p>In this tutorial, we will learn about some basic HTML, CSS, and JavaScript (specifically, the Leaflet.js
 			library) to create a series of progressively complex web maps.</p>
-		<p><a href='https://en.wikipedia.org/wiki/HTML'>HTML (HyperText Markup Language)</a> allows us to structure
-			content for our web page. Our map will be contained in an element within an HTML file.</p>
-		<p><a href='https://en.wikipedia.org/wiki/Cascading_Style_Sheets'>CSS (Cascading Style Sheets)</a> gives us
-			control of the style and visual presentation of our web page. We use it to determine the placement and
-			sizing of
-			the map and to customize some Leaflet elements.</p>
-		<p><a href='https://en.wikipedia.org/wiki/JavaScript'>JS (JavaScript)</a> gives us the ability to add
-			interactivity to our web page. We will use it to pull in map tiles to our web page, add data (or content
-			layers), and handle user interaction with the map.</p>
+
 	</div>
 
 	<div class='section'>
-		<p>So, you want to learn how to make a web map?</p>
-		<p>There are a wealth of options out there (<a href="https://www.arcgis.com/index.html">ArcGIS Online</a>, <a
-				href="https://doc.arcgis.com/en/web-appbuilder/">Web AppBuilder for ArcGIS</a>, <a
-				href="https://developers.arcgis.com/javascript/">ArcGIS JavaScript API</a>, <a
-				href="https://openlayers.org/">OpenLayers</a>, <a href="https://leafletjs.com">Leaflet</a>,
-			<a href="https://www.mapbox.com">Mapbox</a>, <a href="https://carto.com">Carto</a>, <a
-				href="https://d3js.org">D3.js</a>, <a href="https://cloud.google.com/maps-platform/">Google Maps</a> and
-			more) to achieve this dream...but today we will look at
-			Leaflet.js</p>
 		<h2>So, what exactly is Leaflet?</h2>
 		<p><a href='http://leafletjs.com/'>Leaflet</a> is an open-source JavaScript library that gives us code to create
 			interactive, mobile friendly web maps. Think of it as a collection (or library) of prewritten JavaScript
@@ -70,14 +52,38 @@
 		<p>"Slippy" maps with tile based layers with zooming, panning, and feature layers that dev supplies. It handles
 			various basic overhead tasks like converting data to map layers and mouse interactions, and it's easy to
 			extend with plugins. It will also work well across most types of mobile and non-mobile devices.</p>
+		<p>Leaflet is a great low budget option for those that need web mapping capabilities, but don't necessarily have
+			a fully fledged GIS license where they can leverage the online capabilities.</p>
 		<h4>What Leaflet is not:</h4>
-		<p>Leaflet doesn't provide any data for you! Leaflet is a framework for showing and interacting with map data,
-			but it's up to you to provide that data, including a basemap. Leaflet is also not GIS, although it can be
-			combined with tools like CartoDB for GIS-like capabilities. If you need total freedom of form, interaction,
-			transitions,
-			and map projections, consider working with something like D3.</p>
+		<p>Leaflet is also not GIS, although it can perform some GIS-like functions. It can combined with tools like
+			CartoDB for GIS-like capabilities. If you need total freedom of form, interaction,
+			transitions, and map projections, consider working with something like D3.</p>
 	</div>
 
+	<div class='section'>
+		<h2>Web mapping options:</h2>
+		<p>There are a wealth of options out there (<a href="https://www.arcgis.com/index.html">ArcGIS Online</a>, <a
+				href="https://doc.arcgis.com/en/web-appbuilder/">Web AppBuilder for ArcGIS</a>, <a
+				href="https://developers.arcgis.com/javascript/">ArcGIS JavaScript API</a>, <a
+				href="https://openlayers.org/">OpenLayers</a>, <a href="https://leafletjs.com">Leaflet</a>,
+			<a href="https://www.mapbox.com">Mapbox</a>, <a href="https://carto.com">Carto</a>, <a
+				href="https://d3js.org">D3.js</a>, <a href="https://cloud.google.com/maps-platform/">Google Maps</a> and
+			more) to achieve this dream...but today we will look at
+			Leaflet.js</p>
+	</div>
+
+	<div class='section'>
+		<h2>Anatomy of a webmap (and websites)</h2>
+		<p><a href='https://en.wikipedia.org/wiki/HTML'>HTML (HyperText Markup Language)</a> allows us to structure
+			content for our web page. Our map will be contained in an element within an HTML file.</p>
+		<p><a href='https://en.wikipedia.org/wiki/Cascading_Style_Sheets'>CSS (Cascading Style Sheets)</a> gives us
+			control of the style and visual presentation of our web page. We use it to determine the placement and
+			sizing of
+			the map and to customize some Leaflet elements.</p>
+		<p><a href='https://en.wikipedia.org/wiki/JavaScript'>JS (JavaScript)</a> gives us the ability to add
+			interactivity to our web page. We will use it to pull in map tiles to our web page, add data (or content
+			layers), and handle user interaction with the map.</p>
+	</div>
 	<div class='section'>
 		<h2>Setup</h2>
 		<p>For this guide you will need:</p>
