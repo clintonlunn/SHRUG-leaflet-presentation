@@ -111,16 +111,17 @@
 	</div>
 	<div class='section'>
 		<h2>Setup</h2>
-		<p>For this guide you will need:</p>
-		<ul>
-			<li>a computer</li>
-			<li>internet access</li>
-			<li>a web browser (most any modern browser)</li>
-			<li>a text or code editor (notepad, textedit, <a href="">Visual Studio Code</a> (what I will be using
-				today), <a href="http://www.sublimetext.com/">sublime text</a>, <a href="https://atom.io/">atom
-					editor</a>, etc)</li>
-			<li>a local web server</li>
-		</ul>
+		<p>BEFORE YOU START!</p>
+		<p>We're going to need a few things to get going.</p>
+		<p>You'll want a proper text editor (none of that notepad nonsense!). I am going to be using <a
+				href="https://code.visualstudio.com">Visual Studio Code</a> but other alternatives are <a
+				href="http://www.sublimetext.com/">Sublime Text</a>, <a href="https://atom.io/">Atom
+				Editor</a>, <a href="https://notepad-plus-plus.org/">Notepad++</a> (if you like the barebones approach),
+			or even <a href="https://www.vim.org/">Vim</a> if you're super daring</p>
+
+		<p>To display our maps, it is useful to have a local server running on our machine. Today, I will be using a VS
+			Code <a href="https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer">Live server</a>
+			plugin. For today, this isn't totally necessary, but very nice to have.</p>
 
 		<p>To display your map, it is useful to have a local server running on your computer. There are many ways to
 			create a local server on your machine, but one that I prefer is the <a
@@ -203,8 +204,8 @@ crossorigin=""&gt;&lt;/script&gt;
 			&lt;head&gt; section of the HTML page:</p>
 		<pre><code>
 #map {
-width: 800px;
-height: 600px;
+  width: 800px;
+  height: 600px;
 }
 	</code></pre>
 		<p>Now that the HTML and CSS are set, we have set up the basic structure and style of our web map. Next, all we
@@ -340,7 +341,7 @@ const map = L.map(&#39;map&#39;,{
     var map = L.map(&#39;map&#39;<span class="newCode">,{scrollWheelZoom:false}).setView([43.64701, -79.39425], 15)</span>;
 
     L.tileLayer(&#39;http://{s}.tile.osm.org/{z}/{x}/{y}.png&#39;, {
-    attribution: &#39;&amp;copy; &lt;a href=&quot;http://osm.org/copyright&quot;&gt;OpenStreetMap&lt;/a&gt; contributors&#39;
+      attribution: &#39;&amp;copy; &lt;a href=&quot;http://osm.org/copyright&quot;&gt;OpenStreetMap&lt;/a&gt; contributors&#39;
     }).addTo(map);
 
 &lt;/script&gt;
@@ -366,10 +367,53 @@ const map = L.map(&#39;map&#39;,{
 		<p>We will be exploring the L.marker and bindPopup() functionality ** reword this!</p>
 
 		<pre><code>
-			// this is where the simple marker with a popup example will go
-		</code></pre>
+&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;html&gt;
+
+  &lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Quick Start - Leaflet&lt;/title&gt;
+    &lt;link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+      integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+      crossorigin="" /&gt;
+    
+    &lt;script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+      integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+      crossorigin=""&gt;&lt;/script&gt;
+    &lt;style&gt;
+      #map {
+        width: 960px;
+        height: 500px;
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  
+  &lt;body&gt;
+    &lt;div id="map"&gt;&lt;/div&gt;
+    &lt;script&gt;
+    
+      var map = L.map(&#39;map&#39;,{
+    	center: [30.4383, -84.2807],
+    	zoom: 15
+      });
+    	
+      L.tileLayer(&#39;http://{s}.tile.osm.org/{z}/{x}/{y}.png&#39;, {
+    	attribution: &#39;&amp;copy; &lt;a href=&quot;http://osm.org/copyright&quot;&gt;OpenStreetMap&lt;/a&gt;&#39;
+      }).addTo(map);  
+      // Add a single marker
+      const singleMarkerPopupMarker = L.marker([30.4383, -84.2807]);
+      singleMarkerPopupMarker.bindPopup(&#39;Hello world&#39;);
+      singleMarkerPopupMarker.addTo(map);
+  	
+    &lt;/script&gt;
+  &lt;/body&gt;
+
+&lt;/html&gt;
+					</code></pre>
 		<div id='singleMarkerPopup' class='map'></div>
-		<p class='small'><em>view </em><a href='examples/singleMarker.html'>example</a></p>
+		<p class='small'><em>view </em><a href='examples/singleMarkerPopup.html'>example</a></p>
 	</div>
 
 	<div class='section'>
@@ -385,14 +429,14 @@ const map = L.map(&#39;map&#39;,{
 
 		<pre><code class="language-markup">
 fetch('./Pace_Bike_Racks_View.json')
-	.then(response => {
-	if (response.ok === true) {
-		return response.json();
-	} else {
-		alert('Geojson request failed.');
-	}
+  .then(response => {
+    if (response.ok === true) {
+      return response.json();
+    } else {
+      alert('Geojson request failed.');
+    }
 });
-			</code></pre>
+		</code></pre>
 		<p>Let's unpack this a bit, the fetch API will let us give a reference to the location of our GeoJSON data file.
 			Once we receive the response, we ask if the response came back okay (request was successful), we return the
 			contents of that response and convert to JSON format with response.json()</p>
@@ -401,30 +445,30 @@ fetch('./Pace_Bike_Racks_View.json')
 
 		<p>Here's the whole code snippit:</p>
 		<pre><code>
-	&lt;script&gt;
-	  const basemapLayer = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-	  attribution: '&copy; &lt;a href="http://osm.org/copyright"&gt;OpenStreetMap&lt;/a&gt;',
-	  });
-	  
-	  var map = L.map('map', {
-		center: [30.4383, -84.2807],
-		zoom: 13,
-		layers: [basemapLayer]
-	  });
+&lt;script&gt;
+  const basemapLayer = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; &lt;a href="http://osm.org/copyright"&gt;OpenStreetMap&lt;/a&gt;',
+  });
 	
-	  // Let's add some data of pace bike racks in Tallahassee
-	  fetch('../data/Pace_Bike_Racks_View.json')
-		.then(response =&gt; {
-		  if (response.ok === true) {
-			return response.json(); // our data was fetched successfully
-		  } else {
-			alert('Geojson request failed.');
-		  }
-		})
-		.then(bikeRacks =&gt; {
-		  L.geoJSON(bikeRacks).addTo(map);
-		});
-	&lt;/script&gt;
+  var map = L.map('map', {
+    center: [30.4383, -84.2807],
+    zoom: 13,
+    layers: [basemapLayer]
+  });
+
+  // Let's add some data of pace bike racks in Tallahassee
+  fetch('../data/Pace_Bike_Racks_View.json')
+    .then(response =&gt; {
+	  if (response.ok === true) {
+	    return response.json(); // our data was fetched successfully
+	  } else {
+	    alert('Geojson request failed.');
+	  }
+    });
+    .then(bikeRacks =&gt; {
+      L.geoJSON(bikeRacks).addTo(map);
+    });
+&lt;/script&gt;
 			</code></pre>
 		<div id='paceBikes' class='map'></div>
 		<p class='small'><em>view </em><a href='examples/paceBikes.html'>example</a></p>

@@ -20,6 +20,19 @@
 	  	}).addTo(map);
 
 
+	  	// Single marker popup
+	  	var singleMarkerPopupMap = L.map('singleMarkerPopup').setView([30.4383, -84.2807], 15);
+
+	  	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+	  		attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+	  	}).addTo(singleMarkerPopupMap);
+
+	  	const singleMarkerPopupMarker = L.marker([30.4383, -84.2807]);
+	  	singleMarkerPopupMarker.bindPopup('Hello world');
+	  	singleMarkerPopupMarker.addTo(singleMarkerPopupMap);
+
+
+
 	  	// map with bike stations
 
 	  	const basemapLayer = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -27,6 +40,7 @@
 	  	});
 
 	  	var paceBikeMap = L.map('paceBikes', {
+	  		scrollWheelZoom: false,
 	  		center: [30.4383, -84.2807],
 	  		zoom: 13,
 	  		layers: [basemapLayer]
@@ -71,6 +85,7 @@
 	  	// map with ESRI leaflet
 
 	  	var esriLeafletMap = L.map('esriLeaflet', {
+	  		scrollWheelZoom: false,
 	  		center: [30.4383, -84.2807],
 	  		zoom: 15
 	  	});

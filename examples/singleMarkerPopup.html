@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <title>Leaflet Web Map</title>
+  <link rel="shortcut icon" href="../imgs/moto.png" type="image/x-icon" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/vs.min.css" />
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin="" />
+
+  <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+    integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+    crossorigin=""></script>
+
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+
+  <style>
+    #map {
+      width: 960px;
+      height: 500px;
+    }
+
+    body {
+      padding: 0 25px 25px 25px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Basic Leaflet Map</h1>
+
+  <div id="map"></div>
+
+  <pre><code>
+&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;html&gt;
+
+  &lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Quick Start - Leaflet&lt;/title&gt;
+    &lt;link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin="" /&gt;
+    
+    &lt;script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+    integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+    crossorigin=""&gt;&lt;/script&gt;
+    &lt;style&gt;
+      #map {
+        width: 960px;
+        height: 500px;
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  
+  &lt;body&gt;
+    &lt;div id="map"&gt;&lt;/div&gt;
+    &lt;script&gt;
+    
+      var map = L.map(&#39;map&#39;,{
+        center: [30.4383, -84.2807],
+        zoom: 15
+      });
+      
+      L.tileLayer(&#39;http://{s}.tile.osm.org/{z}/{x}/{y}.png&#39;, {
+        attribution: &#39;&amp;copy; &lt;a href=&quot;http://osm.org/copyright&quot;&gt;OpenStreetMap&lt;/a&gt;&#39;
+      }).addTo(map);
+
+      // Add a single marker
+      const singleMarkerPopupMarker = L.marker([30.4383, -84.2807]);
+      singleMarkerPopupMarker.bindPopup(&#39;Hello world&#39;);
+      singleMarkerPopupMarker.addTo(singleMarkerPopupMap);
+    
+    &lt;/script&gt;
+  &lt;/body&gt;
+
+&lt;/html&gt;
+
+	</code></pre>
+
+  <script>
+    var map = L.map('map', {
+      center: [30.4383, -84.2807],
+      zoom: 15
+    });
+
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Add a single marker
+    const singleMarkerPopupMarker = L.marker([30.4383, -84.2807]);
+    singleMarkerPopupMarker.bindPopup('Hello world');
+    singleMarkerPopupMarker.addTo(map);
+  </script>
+</body>
+
+</html>

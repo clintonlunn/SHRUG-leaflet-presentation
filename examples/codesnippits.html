@@ -1,75 +1,42 @@
-&lt;script&gt;
-const basemapLayer = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-attribution: '&copy; &lt;a href="http://osm.org/copyright"&gt;OpenStreetMap&lt;/a&gt;',
-});
+<!doctype html>
+<html lang="en">
+<html>
 
-var map = L.map('map', {
-center: [30.4383, -84.2807],
-zoom: 13,
-layers: [basemapLayer]
-});
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Start - Leaflet</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin="" />
 
-// Let's add some data of pace bike racks in Tallahassee
-fetch('../data/Pace_Bike_Racks_View.json')
-.then(response =&gt; {
-if (response.ok === true) {
-return response.json(); // our data was fetched successfully
-} else {
-alert('Geojson request failed.');
-}
-})
-.then(bikeRacks =&gt; {
-L.geoJSON(bikeRacks).addTo(map);
-});
-&lt;/script&gt;
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+        integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+        crossorigin=""></script>
+    <style>
+        #map {
+            width: 960px;
+            height: 500px;
+        }
+    </style>
+</head>
 
+<body>
+    <div id="map"></div>
+    <script>
+        var map = L.map('map', {
+            center: [30.4383, -84.2807],
+            zoom: 15
+        });
 
+        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+        // Add a single marker
+        const singleMarkerPopupMarker = L.marker([30.4383, -84.2807]);
+        singleMarkerPopupMarker.bindPopup('Hello world');
+        singleMarkerPopupMarker.addTo(map);
+    </script>
+</body>
 
-&lt;!doctype html&gt;
-&lt;html lang="en"&gt;
-&lt;html&gt;
-
-&lt;head&gt;
-&lt;meta charset="utf-8" /&gt;
-&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-&lt;title&gt;Quick Start - Leaflet&lt;/title&gt;
-&lt;link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
-integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-crossorigin="" /&gt;
-
-&lt;script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
-integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
-crossorigin=""&gt;&lt;/script&gt;
-
-&lt;script src="https://unpkg.com/esri-leaflet@2.3.2/dist/esri-leaflet.js"
-integrity="sha512-6LVib9wGnqVKIClCduEwsCub7iauLXpwrd5njR2J507m3A2a4HXJDLMiSZzjcksag3UluIfuW1KzuWVI5n/cuQ=="
-crossorigin=""&gt;&lt;/script&gt;
-
-&lt;style&gt;
-#map {
-width: 960px;
-height: 500px;
-}
-&lt;/style&gt;
-&lt;/head&gt;
-
-&lt;body&gt;
-&lt;div id="map"&gt;&lt;/div&gt;
-&lt;script&gt;
-var map = L.map('map', {
-center: [30.4383, -84.2807],
-zoom: 15
-});
-
-L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-attribution: '&copy; &lt;a href="http://osm.org/copyright"&gt;OpenStreetMap&lt;/a&gt;'
-}).addTo(map);
-
-// add our esri feature layer
-L.esri.featureLayer({
-url: 'https://services.arcgis.com/ptvDyBs1KkcwzQNJ/arcgis/rest/services/Pace_Bike_Racks/FeatureServer/0'
-}).addTo(map);
-&lt;/script&gt;
-&lt;/body&gt;
-
-&lt;/html&gt;
+</html>
