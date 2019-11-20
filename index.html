@@ -34,6 +34,7 @@
 	</header>
 
 	<div class='section'>
+		<h1>Let's make a map with Leaflet.js!</h1>
 		<p>In this tutorial, we will learn about some basic HTML, CSS, and JavaScript (specifically, the Leaflet.js
 			library) to create a series of progressively complex web maps.</p>
 
@@ -46,18 +47,42 @@
 			that does some of the heavy lifting/scripting of web map stuff for us. We will interact with the library
 			through its well documented <a href='http://leafletjs.com/reference.html'>API</a>. It has a small file size
 			but is packed with useful <a href='http://leafletjs.com/features.html'>features</a> and can be extended even
-			further with <a href='http://leafletjs.com/plugins.html'>plugins</a>.</p>
+			further with <a href='http://leafletjs.com/plugins.html'>plugins</a>. Leaflet was created by <a
+				href="https://agafonkin.com/">Vladimir Agafonkin</a> (currently at <a
+				href="https://www.mapbox.com">MapBox</a></aa>
+		</p>
+
+		<p>In essence:</p>
+		<ul>
+			<li>An open source web mapping library</li>
+			<li>Small filesize footprint and optimized for performance</li>
+			<li>Plugin centric for extending functionality</li>
+		</ul>
 
 		<h4>What Leaflet is:</h4>
+		<ul>
+			<li>Free! (and open source) and great for low budget projects</li>
+			<li>Tile base (<a href="https://wiki.openstreetmap.org/wiki/Slippy_Map">slippy maps</a>)</li>
+			<li>Mobile friendly</li>
+			<li>Fully customizable with plugins</li>
+		</ul>
 		<p>"Slippy" maps with tile based layers with zooming, panning, and feature layers that dev supplies. It handles
 			various basic overhead tasks like converting data to map layers and mouse interactions, and it's easy to
 			extend with plugins. It will also work well across most types of mobile and non-mobile devices.</p>
 		<p>Leaflet is a great low budget option for those that need web mapping capabilities, but don't necessarily have
 			a fully fledged GIS license where they can leverage the online capabilities.</p>
 		<h4>What Leaflet is not:</h4>
+		<ul>
+			<li>A GIS</li>
+			<li>A data provider, you must source that yourself (even the basemap)</li>
+		</ul>
 		<p>Leaflet is also not GIS, although it can perform some GIS-like functions. It can combined with tools like
 			CartoDB for GIS-like capabilities. If you need total freedom of form, interaction,
-			transitions, and map projections, consider working with something like D3.</p>
+			transitions, and map projections, consider working with something like <a href="http://d3js.org/">D3.js</a>.
+		</p>
+
+		<p>Leaflet is also not point and click software, you need to know some basics about programming to get up and
+			running.</p>
 	</div>
 
 	<div class='section'>
@@ -91,7 +116,7 @@
 			<li>a computer</li>
 			<li>internet access</li>
 			<li>a web browser (most any modern browser)</li>
-			<li>a text or code editor (notepad, textedit, <a href="">visual studio Code</a> (what we will be using
+			<li>a text or code editor (notepad, textedit, <a href="">Visual Studio Code</a> (what I will be using
 				today), <a href="http://www.sublimetext.com/">sublime text</a>, <a href="https://atom.io/">atom
 					editor</a>, etc)</li>
 			<li>a local web server</li>
