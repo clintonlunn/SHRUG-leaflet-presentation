@@ -21,7 +21,9 @@
 
 
 	  	// Single marker popup
-	  	var singleMarkerPopupMap = L.map('singleMarkerPopup').setView([30.4383, -84.2807], 15);
+	  	var singleMarkerPopupMap = L.map('singleMarkerPopup', {
+	  		scrollWheelZoom: false
+	  	}).setView([30.4383, -84.2807], 15);
 
 	  	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 	  		attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
