@@ -475,11 +475,22 @@ fetch('./Pace_Bike_Racks_View.json')
 	</div>
 
 	<div class='section'>
+		<h2>Style the data</h2>
+		<p>We can also leverage the <a href="https://leafletjs.com/reference.html#icon">L.icon</a> class to style our
+			markers </p>
+		<pre><code>
+
+			// code for L.icon
+		</code></pre>
+		<div id='styledDataMap' class='map'></div>
+		<p class='small'><em>view </em><a href='examples/styledPaceData.html'>example</a></p>
+	</div>
+
+	<div class='section'>
 		<h1>Plugins!</h1>
 		<p>One of the cool things about Leaflet is that it's built to be completely extendable with and there are an
-			abundance
-			of <a href="https://leafletjs.com/plugins.html">plugins</a> to be used and modified. It's also completely
-			necessary because Leaflet gives you very little functionality out of the box.</p>
+			abundance of <a href="https://leafletjs.com/plugins.html">plugins</a> to be used and modified. It's also
+			completely necessary because Leaflet gives you very little functionality out of the box.</p>
 		<p>One "plugin" (really like a small library of functionality) that we will look at today is <a
 				href="https://esri.github.io/esri-leaflet/"></a>ESRI Leaflet that
 			will help us interface with ESRI's data services.</p>
@@ -555,6 +566,35 @@ crossorigin=&quot;&quot;>&lt;/script&gt;
 
 &lt;/html&gt;
 		</code></pre>
+	</div>
+
+	<div class='section'>
+		<h1>More examples:</h1>
+	</div>
+
+	<div class='section'>
+		<h2>Chloropleth</h2>
+		<p>Making a choropleth map isn't very hard either...</p>
+
+
+		<p>Bring in the plugin CDN...</p>
+		<pre><code>
+				&lt;script src=&quot;https://unpkg.com/esri-leaflet@2.3.2/dist/esri-leaflet.js&quot;
+				integrity=&quot;sha512-6LVib9wGnqVKIClCduEwsCub7iauLXpwrd5njR2J507m3A2a4HXJDLMiSZzjcksag3UluIfuW1KzuWVI5n/cuQ==&quot;
+				crossorigin=&quot;&quot;>&lt;/script&gt;
+				
+						</code></pre>
+
+		<p>Next, we can bring in a FeatureLayer by using the <a
+				href="https://esri.github.io/esri-leaflet/api-reference/layers/feature-layer.html">L.esri.featureLayer()</a>
+			method. Let's bring in some TLCGIS data:</p>
+
+		<div id='choroplethMap' class='map'></div>
+
+		<pre><code>
+				// this is where some choropleth code examples will go
+						</code></pre>
+
 	</div>
 
 	<div class='section'>
