@@ -49,7 +49,8 @@
 	  	});
 
 	  	// Let's add some data of pace bike racks in Tallahassee
-	  	fetch('./Pace_Bike_Racks_View.json')
+	  	// fetch('./Pace_Bike_Racks_View.json')
+	  	fetch('https://opendata.arcgis.com/datasets/73276aad738740b69ce6d86a9350abde_0.geojson')
 	  		.then(function (response) {
 	  			if (response.ok === true) {
 	  				return response.json(); // our data was fetched successfully
@@ -59,7 +60,7 @@
 	  		})
 	  		.then(function (bikeRacks) {
 	  			L.geoJSON(bikeRacks, {
-	  				// style: function (feature) {
+	  				// style: function (feature) { // you can add some style if you want
 	  				//     return feature.properties && feature.properties.style;
 	  				// },
 	  				// pointToLayer: function (feature, latlng) {
@@ -78,6 +79,7 @@
 	  	// map with styled bike stations
 
 	  	var styledPaceBikes = L.map('styledPaceBikes', {
+	  		scrollWheelZoom: false,
 	  		center: [30.4383, -84.2807],
 	  		zoom: 13
 	  	});
