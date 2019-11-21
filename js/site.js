@@ -46,6 +46,50 @@
 	  		layers: [basemapLayer]
 	  	});
 
+	  	// map with styled bike stations
+
+	  	var styledPaceBikes = L.map('styledPaceBikes', {
+	  		center: [30.4383, -84.2807],
+	  		zoom: 13
+	  	});
+
+	  	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+	  		attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+	  	}).addTo(styledPaceBikes);
+
+	  	var paceBikeIcon = new L.Icon({
+	  		iconSize: [35, 27],
+	  		iconAnchor: [13, 27],
+	  		popupAnchor: [1, -24],
+	  		iconUrl: '../images/bicycle.png'
+	  	});
+
+
+	  	// Let's add some data of pace bike racks in Tallahassee
+	  	fetch('../Pace_Bike_Racks_View.json')
+	  		.then(response => {
+	  			if (response.ok === true) {
+	  				return response.json(); // our data was fetched successfully
+	  			} else {
+	  				alert('Geojson request failed.');
+	  			}
+	  		})
+	  		.then(bikeRacks => {
+	  			L.geoJSON(bikeRacks, {
+	  				pointToLayer: function (feature, latlng) {
+
+	  					const popup = L.popup().setContent(
+	  						"I'm a hippity hoppity pace bike docking location");
+	  					const marker = L.marker(latlng, {
+	  						icon: paceBikeIcon
+	  					});
+	  					marker.bindPopup(popup);
+
+	  					return marker;
+	  				}
+	  			}).addTo(styledPaceBikes);
+	  		})
+
 	  	// Let's add some data of pace bike racks in Tallahassee
 	  	fetch('./Pace_Bike_Racks_View.json')
 	  		.then(function (response) {
