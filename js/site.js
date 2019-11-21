@@ -48,6 +48,33 @@
 	  		layers: [basemapLayer]
 	  	});
 
+	  	// Let's add some data of pace bike racks in Tallahassee
+	  	fetch('./Pace_Bike_Racks_View.json')
+	  		.then(function (response) {
+	  			if (response.ok === true) {
+	  				return response.json(); // our data was fetched successfully
+	  			} else {
+	  				alert('Geojson request failed.');
+	  			}
+	  		})
+	  		.then(function (bikeRacks) {
+	  			L.geoJSON(bikeRacks, {
+	  				// style: function (feature) {
+	  				//     return feature.properties && feature.properties.style;
+	  				// },
+	  				// pointToLayer: function (feature, latlng) {
+	  				//     return L.circleMarker(latlng, {
+	  				//         radius: 8,
+	  				//         fillColor: "#ff7800",
+	  				//         color: "#000",
+	  				//         weight: 1,
+	  				//         opacity: 1,
+	  				//         fillOpacity: 0.8
+	  				//     });
+	  				// }
+	  			}).addTo(paceBikeMap);
+	  		});
+
 	  	// map with styled bike stations
 
 	  	var styledPaceBikes = L.map('styledPaceBikes', {
@@ -63,7 +90,7 @@
 	  		iconSize: [35, 27],
 	  		iconAnchor: [13, 27],
 	  		popupAnchor: [1, -24],
-	  		iconUrl: '../images/bicycle.png'
+	  		iconUrl: './images/bicycle.png'
 	  	});
 
 
@@ -90,33 +117,6 @@
 	  					return marker;
 	  				}
 	  			}).addTo(styledPaceBikes);
-	  		})
-
-	  	// Let's add some data of pace bike racks in Tallahassee
-	  	fetch('./Pace_Bike_Racks_View.json')
-	  		.then(function (response) {
-	  			if (response.ok === true) {
-	  				return response.json(); // our data was fetched successfully
-	  			} else {
-	  				alert('Geojson request failed.');
-	  			}
-	  		})
-	  		.then(function (bikeRacks) {
-	  			L.geoJSON(bikeRacks, {
-	  				// style: function (feature) {
-	  				//     return feature.properties && feature.properties.style;
-	  				// },
-	  				// pointToLayer: function (feature, latlng) {
-	  				//     return L.circleMarker(latlng, {
-	  				//         radius: 8,
-	  				//         fillColor: "#ff7800",
-	  				//         color: "#000",
-	  				//         weight: 1,
-	  				//         opacity: 1,
-	  				//         fillOpacity: 0.8
-	  				//     });
-	  				// }
-	  			}).addTo(paceBikeMap);
 	  		});
 
 	  	//map with scroll wheel deactivated
