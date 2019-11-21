@@ -146,3 +146,105 @@
 	  	L.esri.featureLayer({
 	  		url: 'https://services.arcgis.com/ptvDyBs1KkcwzQNJ/arcgis/rest/services/Pace_Bike_Racks/FeatureServer/0'
 	  	}).addTo(esriLeafletMap);
+
+
+	  	// Storm tracks
+
+	  	var stormTracksMap = L.map('stormTracks', {
+	  		scrollWheelZoom: false
+	  	}).setView([0, 0], 2);
+
+	  	const hurricaneColors = {
+	  		0: '#00faf4',
+	  		1: '#ffffcc',
+	  		2: '#ffe775',
+	  		3: '#ffc140',
+	  		4: '#ff8f20',
+	  		5: '#ff6060'
+	  	}
+
+	  	subHurricaneColor = {
+	  		'Tropical Depression': '#5ebaff	',
+	  		'Subtropical Storm': '#00faf4',
+	  		'Tropical Storm': '#00faf4',
+	  		'Disturbance Storm': '#80ccff',
+	  	}
+
+	  	var Esri_WorldImagery = L.tileLayer(
+	  		'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+	  			attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+	  		}).addTo(stormTracksMap);
+
+
+	  	let xhr = new XMLHttpRequest();
+	  	xhr.open('GET', './hurricanes.json');
+	  	xhr.setRequestHeader('Content-Type', 'application/json');
+	  	xhr.responseType = 'json';
+	  	xhr.onload = function () {
+	  		const hurricaneData = xhr.response.features
+	  		if (xhr.status !== 200) return
+
+	  		const hurricanesLayer = L.geoJSON(hurricaneData, {}).addTo(stormTracksMap);
+
+	  		hurricanesLayer.eachLayer((layer) => {
+	  			if (layer.feature.properties.SS > 0) {
+	  				layer.setStyle({
+	  					"color": hurricaneColors[layer.feature.properties.SS],
+	  					"weight": 8,
+	  					"opacity": 0.75
+	  				})
+	  			} else {
+	  				layer.setStyle({
+	  					"color": subHurricaneColor[layer.feature.properties.STORMTYPE],
+	  					"weight": 8,
+	  					"opacity": 0.75
+	  				})
+
+	  			}
+
+	  			const popupContent = L.popup().setContent(`Hurricane name: ${layer.feature.properties.STORMNAME} <br>
+                                                Hurricane strength: ${layer.feature.properties.STORMTYPE}`);
+	  			layer.bindPopup(popupContent, {
+	  				closeButton: false,
+	  			});
+
+	  			layer.on('mouseover', () => {
+	  				layer.setStyle({
+	  					color: 'red'
+	  				});
+	  				layer.openPopup();
+
+	  			});
+
+	  			layer.on('mouseout', () => {
+	  				layer.setStyle({
+	  					color: hurricaneColors[layer.feature.properties.SS]
+	  				});
+	  				layer.closePopup();
+	  			});
+	  		});
+
+	  	};
+	  	xhr.send();
+
+
+	  	// custom fill polygons map
+
+	  	var customFillPolygonsMap = L.map('customPolygonFill', {
+	  		// renderer: L.canvas()
+	  	}).setView([27.6, -81.5], 8);
+	  	var Esri_WorldImagery = L.tileLayer(
+	  		'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+	  			attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+	  		}).addTo(customFillPolygonsMap);
+
+
+	  	const lakes = L.esri.featureLayer({
+	  		url: 'https://ca.dep.state.fl.us/arcgis/rest/services/OpenData/LAKES/MapServer/0/',
+	  		where: "SHAPE.AREA > 10000000",
+	  		style: function () {
+	  			return {
+	  				fill: 'url(../images/kermit.gif)',
+	  			}
+	  		}
+	  	}).addTo(mymap);

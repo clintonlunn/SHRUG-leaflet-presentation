@@ -19,6 +19,10 @@
 	<script src="https://unpkg.com/esri-leaflet@2.3.2/dist/esri-leaflet.js"
 		integrity="sha512-6LVib9wGnqVKIClCduEwsCub7iauLXpwrd5njR2J507m3A2a4HXJDLMiSZzjcksag3UluIfuW1KzuWVI5n/cuQ=="
 		crossorigin=""></script>
+
+
+	<script src="./lib/plugins/leaflet-polygon.fillPattern.js"></script>
+
 	<script>
 		hljs.initHighlightingOnLoad();
 	</script>
@@ -621,6 +625,17 @@ crossorigin=&quot;&quot;>&lt;/script&gt;
 		<h2>Florida Maternal Mental Health Collaborative:</h2>
 		<p><a href="https://flmomsmhresources.org/map">Mental Health Facility Locator Map</a></p>
 		<img src="./images/COMmap.png" alt="Mental Health map" class='map'>
+	</div>
+
+	<div class='section'>
+		<h2>Storm map with hover effects</h2>
+		<div id='stormTracks' class='map'></div>
+
+	</div>
+
+	<div class='section'>
+		<h2>Custom fill of polygons</h2>
+		<div id='customPolygonFill' class='map'></div>
 	</div>
 
 	<div class='section'>
